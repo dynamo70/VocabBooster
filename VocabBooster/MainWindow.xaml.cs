@@ -73,27 +73,14 @@ namespace VocabBooster
 				}
 			}
 			secList.Sort();
-			for (int begin = 0; begin < secList.Count; begin++) 
-			{
-				// --below has not yet completed, still looking for a solution in WPF
-				//((Label)mainGrid("Label" + (begin + 1))).Text = descLine[secList[begin]];
-				specifyLength.Add(descLine[secList[begin]]);
-				lengthString.Add(specifyLength[begin].Length);
-
-
-				/////Above for loop does not work//////
-				// because I could not find an equivalent of WPF yet
-				//
-				// below VB.Net code line and it must be converted to WPF
-				// the exact line of code indicated with this -->
-				//
-				//For begin As Integer = 0 To seclist.Count - 1
-				//--> CType(frm.Controls("Label" & begin + 1), Label).Text = DescLine(seclist(begin))
-				//	specifyLength.Add(DescLine(seclist(begin)))
-				//	lengthString.Add(specifyLength(begin).Length)
-				//Next
-
-			}
+			
+			foreach(int begin in secList)
+            		{
+            			// --below has not yet completed, still looking for a solution in WPF
+            			(Label)(frm.Controls("Label" + (begin + 1).ToString)).Text = DescLine(seclist(begin));
+                		specifyLength.Add(DescLine(seclist(begin)));
+                		lengthString.Add(specifyLength(begin).Length);
+            		}
 			lengthString.Sort();
 
 			// generate a string count of lengthString.Item(4) to use in TextRenderer
