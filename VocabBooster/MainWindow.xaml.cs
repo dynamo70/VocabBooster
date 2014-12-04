@@ -75,12 +75,12 @@ namespace VocabBooster
 			secList.Sort();
 			
 			foreach(int begin in secList)
-            		{
-            			// --below has not yet completed, still looking for a solution in WPF
-            			(Label)(frm.Controls("Label" + (begin + 1).ToString)).Text = DescLine(seclist(begin));
-                		specifyLength.Add(DescLine(seclist(begin)));
-                		lengthString.Add(specifyLength(begin).Length);
-            		}
+            {
+            	// --below has not yet completed, still looking for a solution in WPF
+            	(Label)(frm.Controls("Label" + (begin + 1).ToString)).Text = descLine[secList[begin]];
+                specifyLength.Add(descLine[secList[begin]]);
+				lengthString.Add(specifyLength[begin].Length);
+            }
 			lengthString.Sort();
 
 			// generate a string count of lengthString.Item(4) to use in TextRenderer
