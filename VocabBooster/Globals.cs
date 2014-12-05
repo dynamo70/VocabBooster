@@ -16,7 +16,7 @@ namespace VocabBooster
 			// Start up path in registry
 			const string c_strRunWinStartUp = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\";
 
-			public static string strExePath = "\\MyVocabBooster";
+			public static string strExePath = "\\VocabBooster";
 			public static string strTxtFile = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\MyWordsToLearn.txt";
 			public static string strRemove = string.Empty;
 

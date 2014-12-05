@@ -1,22 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Xml.Linq;
-using System.Xml;
-using System.Drawing;
 namespace VocabBooster
 {
 	public delegate void EventHandler();
@@ -34,10 +22,70 @@ namespace VocabBooster
 		{
 			InitializeComponent();
 		}
+
+		/// <summary>
+		/// This method works with an existance of a directory in Program Files
+		/// that folder must be created before this method runs
+		/// </summary>
+		private void CopyExeFile(string copyPath)
+		{
+			string path = AppDomain.CurrentDomain.BaseDirectory;
+
+			string completelyFullFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+			string fileName = Path.GetFileName(completelyFullFilePath);
+			string copyFile = copyPath + "\\" + fileName;
+			if (!System.IO.File.Exists(copyFile))
+			{
+				try
+				{
+					System.IO.File.Copy(completelyFullFilePath, copyFile);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+			}
+		}
 		
 		private void Window_Loaded_1(object sender, RoutedEventArgs e)
 		{
+			// Specifying a Folder in Program Files.
+			string strProgFiles = Environment.GetEnvironmentVariable("PROGRAMFILES");
+			// passing my project executable file name.
+			string fullPath = strProgFiles + Globals.strExePath;
 
+			// to get whole path of my project executable file
+			string completelyFullFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+			// then specify of the executable file name and new desired folder path in ProgramFiles
+			string strMyProgramWithFullPath = fullPath + Path.GetFileName(completelyFullFilePath);
+
+			if (!System.IO.Directory.Exists(fullPath))
+			{
+				try
+				{
+					System.IO.Directory.CreateDirectory(fullPath);
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+				}
+				CopyExeFile(fullPath);
+			}
+			else 
+			{
+				if (!System.IO.File.Exists(strMyProgramWithFullPath)) 
+				{
+					try
+					{
+						System.IO.Directory.CreateDirectory(fullPath);
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show(ex.Message);
+					}
+				}
+			}
 		}
 
 		private void buildingStone()
@@ -97,8 +145,6 @@ namespace VocabBooster
 			frm.theWord = wordLine[pickedNumber];
 			frm.theMeaning = descLine[pickedNumber];
 		}
-
-
 
 		public static event EventHandler _timerworker;
 		DispatcherTimer dt = new DispatcherTimer();
