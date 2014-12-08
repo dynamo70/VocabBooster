@@ -1,22 +1,26 @@
 ﻿<Window x:Name="mainWin" x:Class="VocabBooster.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="481" Width="451" Loaded="Window_Loaded_1" ResizeMode="NoResize">
+        Title="MainWindow" Height="504" Width="454" Loaded="Window_Loaded_1" ResizeMode="NoResize">
     <Grid x:Name="mainGrid" Margin="0,0,0,0">
-        <TabControl x:Name="tabctrl" HorizontalAlignment="Left" Height="400" Margin="2,44,0,0" VerticalAlignment="Top" Width="433">
+        <TabControl x:Name="tabctrl" HorizontalAlignment="Left" Height="400" Margin="3,64,0,0" VerticalAlignment="Top" Width="433">
             <TabItem x:Name="in_Progress" Header="In Progress">
                 <Grid Background="#FFE5E5E5" Margin="0,0,-8,0">
-                    <DataGrid x:Name="DGWProgress" DockPanel.Dock ="Top"/>
+                    <DataGrid x:Name="DGWProgress" DockPanel.Dock ="Top" ItemsSource="{Binding}"  Margin="0,0,10,0"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="learned" Header="Learned">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="DGWLearned" DockPanel.Dock ="Top" ItemsSource="{Binding}"  Margin="0,0,10,0"/>
+                </Grid>
             </TabItem>
             <TabItem x:Name="listKnowing" Header="List Of Knowing">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="DGWListOfKnowing" DockPanel.Dock ="Top" ItemsSource="{Binding}"  Margin="0,0,10,0"/>
+                </Grid>
             </TabItem>
         </TabControl>
-        <ToolBarTray DockPanel.Dock="Top" Margin="0,0,0,409">
+        <ToolBarTray DockPanel.Dock="Top" Margin="0,0,0,418">
             <ToolBar> 
                 <Button x:Name="btnAdd" Click="btnAdd_Click">
                     <StackPanel Orientation="Horizontal">
@@ -62,5 +66,6 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
+        <Label x:Name="lblAnnouncement" HorizontalAlignment="Left" Margin="6,42,0,0" VerticalAlignment="Top" Width="427" Height="27"/>
     </Grid>
 </Window>
